@@ -1,0 +1,7 @@
+{
+  "name": "moveai",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

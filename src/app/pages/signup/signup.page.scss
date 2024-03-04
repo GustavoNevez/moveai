@@ -1,0 +1,48 @@
+
+.button-responsive{
+    --border-radius: 60px;
+    --padding-bottom:20px;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    padding-inline: 80px;
+    padding-top: 10px;
+    color:#1C1C1E;   
+}
+.input{
+    font-size: 300;
+}
+ion-item{
+    --background:#f1f1f1;
+    border-radius: 10px;
+    margin-bottom: 14px;  
+}
+.header{
+    margin-top: 80px;
+    margin-bottom: 80px;
+    text-align: center;
+    .title{
+        font-size: 1.5rem;
+        font-weight: 555;
+        position:static;
+        
+    }
+    .subTitle{
+        color:gray;
+        font-size:0.9rem;
+    }
+    
+}
+.formStyle{
+    padding-inline:2rem;
+}
+.signupLink{
+    display: flex;
+    margin:auto;
+    flex-direction: row;
+    align-items: center;
+    
+    p{
+        font-size: 0.9rem;
+    }
+    
+}

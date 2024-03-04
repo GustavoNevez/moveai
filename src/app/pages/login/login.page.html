@@ -1,0 +1,34 @@
+
+
+<ion-content [fullscreen]="true">
+  <div class="header">
+    <ion-title class="title">Bem-vindo</ion-title>
+      <p class="subTitle">Faça o login para acessar sua conta!</p> 
+  </div>
+  <form class="formStyle">
+    <div>
+      <ion-item>
+        <ion-input placeholder="E-mail" class="input"></ion-input>
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Senha" class="input"></ion-input>
+        <ion-icon name="lock-closed-outline"></ion-icon>
+      </ion-item>
+        <div class="signupLink">
+        <a [routerLink]="['/reset-password']" style="color: #D0FD3E; ">Esqueceu a senha? </a>
+      </div>
+      <div class="signupLink">
+        <p>Não possui uma conta?<a [routerLink]="['/signup']" style="color: #D0FD3E;">Cadastre-se agora!</a></p>
+      </div>
+    </div>
+  </form>
+  <ion-grid>
+    <ion-row justify-content-center align-items-center >
+      <ion-col size="12" size-md="12" size-lg="12" >
+        <ion-button [routerLink]="['/landing']"class="button-responsive" expand="block" style="--background:#D0FD3E;">Entrar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

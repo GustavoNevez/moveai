@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "moveai-84760": {
+      "hosting": {
+        "app": [
+          "moveai-84760"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "moveai-84760"
+  }
+}
