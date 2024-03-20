@@ -1,0 +1,116 @@
+ion-content{
+    --background:#e0dfe5;
+
+    #header {
+        height:33%;
+        background: #7072e6;
+        border-radius: 0 0 20px 20px;
+        display:flex;
+        flex-direction: column;
+        color:#fff;
+        padding:20px;
+    
+        #app-bar {
+            height: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+        
+            ion-icon{
+            font-size: 24px;
+            margin-left:-5px;
+            }
+            #logo {
+                width: 100px;
+                height: 100px;
+                margin-left: -10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                
+                
+              
+            
+         }
+    }
+    h1{
+        font-size: 19px;
+        margin-bottom:5px;
+    }
+    p{
+        font-size:15px;
+        line-height:1.4;
+    }
+  }
+    .wrapper{
+        position: absolute;
+        top: 26%;
+        left: 4%;
+        right: 4%;
+        
+        .form-wrapper{
+            box-shadow: none;
+            border-radius: 20px;
+            padding: 15px 10px;
+
+            ion-item{
+                --background:#efefef;
+                --padding-start:10px;
+                --highlight-height:0;
+                --border-width:0;
+                --min-height:40px;
+                margin-bottom:10px;
+                border-radius: 5px;
+
+                ion-icon{
+                    font-size:18px;
+                }
+                ion-input{
+                    margin-left:10px;
+                    font-size: 14px;
+                }
+            }
+
+            ion-button{
+                margin-top:25px;
+            }
+         }
+
+        .line-text {
+            padding:0% 30px;
+            position: relative;
+            height: 20px;
+            margin-top: 30px;
+
+            .lines{
+                height: 1px;
+                background: #858585;
+                display: block;
+            }
+            .text{
+                position: absolute;
+                top: -7px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #e0dfe6;
+                padding: 0 16px;
+                font-size: 12px;
+                font-weight: 500;
+                color: #5e5e5e;
+            }
+        }
+        .google-wrraper{
+            box-shadow: none;
+            border-radius: 20px;
+            .google{
+                display:flex;
+                justify-content: center;
+                padding:5px;
+            }
+          }
+        }
+    }
+
+
+    

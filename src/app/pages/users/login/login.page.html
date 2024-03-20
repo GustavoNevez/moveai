@@ -1,0 +1,59 @@
+
+<ion-content [fullscreen]="true">
+  <div id="header" collapse="condense">
+    <div id="app-bar">
+      <ion-icon (click)="redirectPage()" name="arrow-back"></ion-icon>
+      <div id ="logo">
+          <img src="assets/imgs/petuxos.png" alt="">
+      </div>
+      <div></div>
+    </div>
+    <h1>Faça seu Login!</h1>
+    <p>Para organizar a vida do seu Pet!</p>
+  </div>
+
+  <div class="wrapper">
+    <ion-card class="form-wrapper">
+      <ion-card-content>
+        <form [formGroup]="loginForm">
+          <ion-item>
+            
+            <ion-input formControlName="email" placeholder="E-mail" class="input"></ion-input>
+            <ion-icon name="mail" position="end"></ion-icon>
+          </ion-item>
+          <div *ngIf="this.loginForm.controls?.['email'].touched && this.loginForm.controls?.['email'].invalid">
+            <ion-text *ngIf="this.errorControl.email.errors?.required" style="font-size: smaller;" color="danger">Insira um E-mail</ion-text>
+            <ion-text *ngIf="this.errorControl.email.errors?.pattern"style="font-size: smaller;" color="danger">Insira um E-mail valido!"</ion-text>
+          </div>
+    
+          <ion-item>  
+            <ion-input [type]="type ? 'password' : 'texte'" placeholder="Senha" class="input" type="password" ></ion-input>
+            <ion-icon name="lock-closed-outline"(click)='showpassword()'[name]="type? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+          </ion-item>
+          <div *ngIf="this.loginForm.controls?.['password'].touched && this.loginForm.controls?.['password'].invalid">
+            <ion-text *ngIf="this.errorControl.password.errors?.required"style="font-size: smaller;" color="danger">Insira uma Senha!</ion-text>       
+          </div>
+    </form>
+      <ion-button expand="block" (click)="login()" [disabled]="loginForm.invalid">Entre</ion-button>
+     </ion-card-content>
+    </ion-card>
+    <div class="line-text">
+      <span class="lines"></span>
+      <span class="text">Ou conecte via</span>
+    </div>
+
+    
+    <ion-card class="google-wrapper">
+        <ion-card-content>
+          <div class="google">
+          <ion-button (click)="logarComGmail()" expand="block" color="danger">Entrar com Google <ion-icon name="logo-google"></ion-icon>
+          </ion-button>
+        </div>
+       </ion-card-content>
+      </ion-card>
+    </div>
+  
+</ion-content>
+
+
+  

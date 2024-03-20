@@ -4,46 +4,60 @@ import { Router } from '@angular/router';
 import { LoadingController , ToastController} from '@ionic/angular';
 import { AuthenticationService } from 'src/app/authentication.service';
 
-@Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.page.html',
-  styleUrls: ['./reset-password.page.scss'],
-})
-export class ResetPasswordPage implements OnInit {
- resetaForm: FormGroup;
 
+
+@Component({
+  selector: 'app-register',
+  templateUrl: './register.page.html',
+  styleUrls: ['./register.page.scss'],
+})
+export class RegisterPage implements OnInit {
+  type: boolean = true;
+  regForm: FormGroup;
   constructor( private toastController: ToastController, public authService: AuthenticationService,public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public router : Router)   {}
 
   ngOnInit() {
-    this.resetaForm = this.formBuilder.group({
+    this.regForm = this.formBuilder.group({
+      fullname:['',[Validators.required]],
       email:['',[
         Validators.required,
         Validators.email,
         Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")
       ]],
+      password:['',[
+      Validators.required,
+      Validators.pattern("")]],
        })
   }
 
   get errorControl(){
-    return this.resetaForm?.controls;}
+    return this.regForm?.controls;}
     
-  async resetPassword(){
+  async signUp(){
     const loading = await this.loadingCtrl.create({
       message:'Por favor,aguarde',
     });
+
     await loading.present();
     try {
-      const user = await this.authService.resetPassoword(this.resetaForm.value.email);
+      const user = await this.authService.registerUser(this.regForm.value.email,this.regForm.value.password);
     } catch(error){
       let message:string;
       console.error(error);
       console.error(error.code);
       console.error(error.message);
-
+      switch(error.code){
+        case 'auth/email-already-in-use':
+          error.message='O email já foi utilizado para cadastro!';
+          break;
+      };
+      this.presentToast(error.message);
+      
+      
     } finally {
       loading.dismiss();
-      console.log('Senha Alterada')
-      this.router.navigate['/login'];
+      this.redirectPageLogin();
+      
     }
   }
   async presentToast(message:string) {
@@ -55,4 +69,23 @@ export class ResetPasswordPage implements OnInit {
 
     await toast.present();
   }
+  
+  showpassword(){
+    this.type= !this.type;
+  }
+  redirectPage(){
+    this.router.navigate(['/initial']);
+  }
+  redirectPageLogin(){
+    this.router.navigate(['/login2']);
+  }
+  
+
 }
+ 
+
+
+
+
+  
+

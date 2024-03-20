@@ -1,7 +1,8 @@
 import { ResetPasswordPage } from './pages/reset-password/reset-password.page';
 import { Injectable } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireAuth, } from '@angular/fire/compat/auth';
+import { GoogleAuthProvider, getAuth, signInWithPopup, browserPopupRedirectResolver,} from '@firebase/auth';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,7 +15,7 @@ export class AuthenticationService {
     async loginUser(email:string,password:string){
       return await this.ngFireAuth.signInWithEmailAndPassword(email, password)
     }
-    async resetPassoword(email:string,password:string){
+    async resetPassoword(email:string){
       return await this.ngFireAuth.sendPasswordResetEmail(email)
     }
     async signOut(){
@@ -23,4 +24,12 @@ export class AuthenticationService {
     async getProfile(){
       return await this.ngFireAuth.currentUser
     }
+    async getAuth(){
+      return await this.getAuth()
+    }
+    async logarComGoogle(){
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth();
+      return signInWithPopup(auth, provider, browserPopupRedirectResolver);
+     }
 }

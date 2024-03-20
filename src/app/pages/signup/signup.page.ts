@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators,} from '@angular/forms';
+import { Router } from '@angular/router';
+import { LoadingController , ToastController} from '@ionic/angular';
+import { AuthenticationService } from 'src/app/authentication.service';
 
 
 @Component({
@@ -10,11 +12,9 @@ import { LoadingController } from '@ionic/angular';
 })
 
 export class SignupPage implements OnInit {
-
+  type: boolean = true;
   regForm: FormGroup;
-  
-
-  constructor(public formBuilder:FormBuilder,public loadingCtrl: LoadingController)   {}
+  constructor( private toastController: ToastController, public authService: AuthenticationService,public formBuilder:FormBuilder,public loadingCtrl: LoadingController,public router : Router)   {}
 
   ngOnInit() {
     this.regForm = this.formBuilder.group({
@@ -24,30 +24,57 @@ export class SignupPage implements OnInit {
         Validators.email,
         Validators.pattern("[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$")
       ]],
-      password:['',
+      password:['',[
       Validators.required,
-      Validators.pattern("(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}")],
-      confirmPassword: ['', Validators.required],
-    }, { validator: this.passwordConfirming })
+      Validators.pattern("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,32}$")]],
+       })
   }
 
   get errorControl(){
     return this.regForm?.controls;}
     
   async signUp(){
-    const loading = await this.loadingCtrl.create();
+    const loading = await this.loadingCtrl.create({
+      message:'Por favor,aguarde',
+    });
     await loading.present();
-    if(this.regForm?.valid){
-      //const user = await this.authService.registerUser(email,password)
+    try {
+      const user = await this.authService.registerUser(this.regForm.value.email,this.regForm.value.password);
+    } catch(error){
+      let message:string;
+      console.error(error);
+      console.error(error.code);
+      console.error(error.message);
+      switch(error.code){
+        case 'auth/email-already-in-use':
+          error.message='O email já foi utilizado para cadastro!';
+          break;
+      };
+      this.presentToast(error.message);
+      
+      
+    } finally {
+      loading.dismiss();
+      this.router.navigate['/login'];
     }
   }
-  passwordConfirming(group: FormGroup) {
-    const password = group.get('password').value;
-    const confirmPassword = group.get('confirmPassword').value;
+  async presentToast(message:string) {
+    const toast = await this.toastController.create({
+      message,
+      duration: 4000,
+      color:'danger',  
+    });
 
-    return password === confirmPassword ? null : { mismatch: true };
+    await toast.present();
   }
+  
+  showpassword(){
+    this.type= !this.type;
+  }
+
 }
+ 
+
 
 
 

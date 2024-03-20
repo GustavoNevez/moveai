@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
       ]],
       password:['',[
       Validators.required,
-      Validators.pattern("^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$")]]
+      Validators.pattern("")]]
   })
  }
  get errorControl(){
@@ -44,11 +44,15 @@ async login(){
     console.error(error);
     console.error(error.code);
     console.error(error.message);
-    /*switch(error.code){
-      case 'auth/email-already-in-use':
-        error.message='O email já foi utilizado para cadastro!';
+    switch(error.code){
+      case 'auth/missing-password':
+        error.message='A senha esta incorreta!';
         break;
-    };*/
+      case 'auth/invalid-email':
+        error.message='O e-mail esta invalido!'
+        break;
+        
+    };
     this.presentToast(error.message);
     
     
@@ -60,7 +64,8 @@ async login(){
 async presentToast(message:string) {
   const toast = await this.toastController.create({
     message,
-    duration: 4000,  
+    duration: 4000,
+    color:'danger',  
   });
 
   await toast.present();
@@ -78,6 +83,10 @@ async presentToast(message:string) {
 }
 showpassword(){
   this.type= !this.type;
+}
+
+redirectPage(){
+  this.router.navigate(['/initial']);
 }
 
 }
